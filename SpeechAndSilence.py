@@ -88,4 +88,4 @@ class Process:
 
     def getvecto(self):
         (rate,sig) = wav.read("sound.wav")
-        return mfcc(sig,rate)
+        return mfcc(sig,rate).T
