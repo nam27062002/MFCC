@@ -87,5 +87,7 @@ class Process:
         return mfcc
 
     def getvecto(self):
-        (rate,sig) = wav.read("sound.wav")
-        return mfcc(sig,rate).T
+        y, sr = librosa.load("sound.wav")
+        mfcc = librosa.feature.mfcc(y, sr, n_mfcc=self.N_MFCC)
+        return mfcc
+        
