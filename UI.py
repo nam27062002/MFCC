@@ -27,7 +27,7 @@ class UI:
             self.showASignal(directory[0])
     def __UIStatistical(self):
         self.ui = UIStatistical.Ui_MainWindow()
-        arrPercent = [round(self.statisticals[0].Percent),round(self.statisticals[1].Percent),round(self.statisticals[2].Percent)]
+        arrPercent = [round(self.statisticals[0].Percent,2),round(self.statisticals[1].Percent,2),round(self.statisticals[2].Percent,2)]
         self.ui.setupUi(self.MainWindow,arrPercent,self.statisticals[0].ARR)
         self.ui.pushButton.clicked.connect(self.__UIStart)
         self.MainWindow.show()

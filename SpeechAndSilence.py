@@ -82,12 +82,28 @@ class Process:
 
     # vector mfcc
     def setVectorMFCC(self):
-        y, sr = librosa.load("sound.wav")
-        mfcc = librosa.feature.mfcc(y, sr, n_mfcc=self.N_MFCC)
-        return mfcc
+        y, sr = librosa.load("sound.wav")   
+        mfcc = librosa.feature.mfcc(y, sr, n_mfcc=13)
+        arr = []
+        for i in range(len(mfcc)):
+            s = 0
+            for j in range(len(mfcc[0])):
+                s += mfcc[i][j]
+            arr.append([s/len(mfcc[0])])
+        arr = np.asarray(arr)
+        #arr = arr/np.linalg.norm(arr)
+        return arr
 
     def getvecto(self):
-        y, sr = librosa.load("sound.wav")
-        mfcc = librosa.feature.mfcc(y, sr, n_mfcc=self.N_MFCC)
-        return mfcc
+        y, sr = librosa.load("sound.wav")   
+        mfcc = librosa.feature.mfcc(y, sr, n_mfcc=13)
+        arr = []
+        for i in range(len(mfcc)):
+            s = 0
+            for j in range(len(mfcc[0])):
+                s += mfcc[i][j]
+            arr.append([s/len(mfcc[0])])
+        arr = np.asarray(arr)
+        #arr = arr/np.linalg.norm(arr)
+        return arr
         

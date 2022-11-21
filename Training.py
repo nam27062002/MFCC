@@ -27,15 +27,11 @@ class Process:
                 index = i
         return [self.vowels[index],f"Dự đoán đây là nguyên âm /{self.vowels[index]}/"]
     def distanceTwoVector(self,vec1,vec2):
-        try:
-            vec1 = np.asarray(vec1)
-            vec2 = np.asarray(vec2)
-        except:
-            pass
-        x = vec1.T
-        y = vec2.T
-        d, _, _, _ = dtw(x, y, dist=lambda x, y: np.linalg.norm(x - y, ord=1))
-        return d
+        # [[1],[2],[3]]
+        s = 0
+        for i in range(len(vec1)):
+            s += pow(vec1[i][0] - vec2[i][0],2)
+        return s
     def Training(self):
         eigenvectors = [] # các vector đặc trưng
         check = True
@@ -46,12 +42,11 @@ class Process:
                 Audio = SpeechAndSilence.Process(url,self.N_MFCC) 
                 self.F = Audio.F
                 eigenvector.append(Audio.VectorMFCC)
-            average = [[0 for i in range(len(eigenvector[0][0]))] for j in range(self.N_MFCC)]
-            for j in range(self.N_MFCC):
-                for k in range(len(eigenvector[0][0])):
-                    s = 0
-                    for i in range(21):
-                        s += eigenvector[i][j][k]
-                    average[j][k] = s / 21
+            average = []
+            for i in range(len(eigenvector[0])):
+                s = 0 
+                for j in range(len(eigenvector)):
+                    s += eigenvector[j][i]
+                average.append(s/len(eigenvector))
             eigenvectors.append(average)
         return eigenvectors
